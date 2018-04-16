@@ -1,0 +1,108 @@
+#EXTM3U
+#EXTNAME: Stingray.com
+#EXTINF:,Adult Alternative
+udp://@224.0.255.113:5500
+#EXTINF:,Alt Country/Americana
+udp://@224.0.255.139:5500
+#EXTINF:,Alt Rock Classics
+udp://@224.0.255.137:5500
+#EXTINF:,Bluegrass
+udp://@224.0.255.110:5500
+#EXTINF:,Broadway
+udp://@224.0.255.120:5500
+#EXTINF:,Caribbean Vintage Vibes
+udp://@224.0.255.159:5500
+#EXTINF:,Chamber Music
+udp://@224.0.255.124:5500
+#EXTINF:,Classic Masters
+udp://@224.0.255.114:5500
+#EXTINF:,Classic R&B and Soul
+udp://@224.0.255.127:5500
+#EXTINF:,Classic Rock
+udp://@224.0.255.115:5500
+#EXTINF:,Country Classics
+udp://@224.0.255.116:5500
+#EXTINF:,Dance Clubbin'
+udp://@224.0.255.109:5500
+#EXTINF:,Dancehall Session
+udp://@224.0.255.158:5500
+#EXTINF:,Easy Listening
+udp://@224.0.255.117:5500
+#EXTINF:,Eclectic Electronic
+udp://@224.0.255.123:5500
+#EXTINF:,Flashback '70s
+udp://@224.0.255.121:5500
+#EXTINF:,Folk Roots
+udp://@224.0.255.122:5500
+#EXTINF:,Gospel
+udp://@224.0.255.142:5500
+#EXTINF:,Groove
+udp://@224.0.255.131:5500
+#EXTINF:,Heavy Metal
+udp://@224.0.255.134:5500
+#EXTINF:,Hip Hop
+udp://@224.0.255.111:5500
+#EXTINF:,Hit List
+udp://@224.0.255.126:5500
+#EXTINF:,Holiday Hits
+udp://@224.0.255.133:5500
+#EXTINF:,Hot Country
+udp://@224.0.255.128:5500
+#EXTINF:,Jammin
+udp://@224.0.255.130:5500
+#EXTINF:,Jazz Masters
+udp://@224.0.255.132:5500
+#EXTINF:,Jazz Now
+udp://@224.0.255.112:5500
+#EXTINF:,Jukebox Oldies
+udp://@224.0.255.135:5500
+#EXTINF:,Kids' Stuff
+udp://@224.0.255.136:5500
+#EXTINF:,Latino Tropical
+udp://@224.0.255.138:5500
+#EXTINF:,Latino Urbana
+udp://@224.0.255.149:5500
+#EXTINF:,Maximum Party
+udp://@224.0.255.108:5500
+#EXTINF:,No Fences
+udp://@224.0.255.129:5500
+#EXTINF:,Nothing' but '90s
+udp://@224.0.255.107:5500
+#EXTINF:,Pop Adult
+udp://@224.0.255.140:5500
+#EXTINF:,Pop Classics
+udp://@224.0.255.141:5500
+#EXTINF:,Remember the '80s
+udp://@224.0.255.145:5500
+#EXTINF:,Retro Latino
+udp://@224.0.255.144:5500
+#EXTINF:,Rock
+udp://@224.0.255.146:5500
+#EXTINF:,Rock Alternative
+udp://@224.0.255.147:5500
+#EXTINF:,Rock en Español
+udp://@224.0.255.150:5500
+#EXTINF:,Romance Latino
+udp://@224.0.255.156:5500
+#EXTINF:,Smooth Jazz
+udp://@224.0.255.148:5500
+#EXTINF:,Soca Motion
+udp://@224.0.255.160:5500
+#EXTINF:,Soul Storm
+udp://@224.0.255.151:5500
+#EXTINF:,Swinging Standards
+udp://@224.0.255.152:5500
+#EXTINF:,The Blues
+udp://@224.0.255.153:5500
+#EXTINF:,The Chill Lounge
+udp://@224.0.255.118:5500
+#EXTINF:,The Light
+udp://@224.0.255.154:5500
+#EXTINF:,The Spa
+udp://@224.0.255.119:5500
+#EXTINF:,Today's Latin Pop
+udp://@224.0.255.125:5500
+#EXTINF:,Urban Beats
+udp://@224.0.255.155:5500
+#EXTINF:,Y2K
+udp://@224.0.255.143:5500
