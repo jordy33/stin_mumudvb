@@ -146,7 +146,7 @@ srate=6051
 ```
 In terminal put the following:
 ```
-umudvb -d --config 91w.txt
+umudvb -d --config arts.txt
 ```
 Open vlc and open network:
 ```
