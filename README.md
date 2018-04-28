@@ -130,4 +130,27 @@ Posible Options are:
 --dumpfile
         Debug option : Dump the stream into the specified file
 ```
+### Example:  
+Go to satellite 91w   
+Create arts.txt and insert the following:
+```
+autoconfiguration=full
+lnb_type=standard
+lnb_lof_standard=5150
+lnb_lof_low=0
+freq=4066
+modulation=8PSK
+delivery_system=DVBS2
+pol=v
+srate=6051
+```
+In terminal put the following:
+```
+umudvb -d --config 91w.txt
+```
+Open vlc and open network:
+```
+udp://239.100.0.0:1234
+```
+
 
