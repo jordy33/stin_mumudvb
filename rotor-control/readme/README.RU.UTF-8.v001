@@ -1,0 +1,155 @@
+rotor-control.0.0.1 04.02.2008
+
+программа для управления полар-ротором
+# ./rotor-control -?
+./rotor-control: invalid option -- ?
+
+Usage: rotor-control [options]
+         turn USALS sat polar-rotor to calculated position or in stored in it position
+
+         Options:
+          -m n        : set modus (default -m1)
+                        -m0 - just calculate and print antenn alignment angles
+                        -m1 - USALS: turn rotor to calculated angle
+                        -m2 - GotoNN: turn rotor to stored position
+                        -m3 - MANUAL: turn rotor to set by -A NN option angle
+
+          -a N        : set adapter N (default -a0)
+          -f N        : set frontend N (default -f0)
+          -V 0|13|18  : set LNB voltage to OFF, 13 or 18 Volts (default -V18)
+          -O 0|1      : set LNB power supply in 0=normal/1=overvoltage mode (add about +1 Volt) (default -O0)
+          -d N        : set DiSEqC switch at input N (0=no_switch 1=A/A, 2=A/B, 3=B/A, 4=B/B) (default -d0)
+
+          -D NN       : set delay NN msec before send any rotor DiSEqC master command (default -D1000 e.g. 1 second)
+                        Polar-rotor need to have time initialised after power up. Must be > 800 msec for SG-2100
+
+          -X DD.MM    : USALS: rotor location Longitude, XX=degrees MM=minutes, minus sign for East  (default -X -30.20)
+          -Y DD.MM    : USALS: rotor location Latitude,  XX=degrees MM=minutes, minus sign for South (default -Y 59.51)
+          -s DD.dd    : USALS: Sat Longitude in degrees, minus sign for East (default -s -19.20) (-s0 = no send USALS command)
+
+          -n NN       : GotoNN: drive to stored in rotor position memory cell NN (default -n5) (-n0 = no send gotoNN command)
+
+          -A NN       : MANUAL: set rotor angle NN degrees, minus sign for East (default -A00 = drive to zero rotor direction
+
+          -t NN       : set delay NN seconds while LNB voltage is up after send USALS or GotoNN command (default -t30)
+
+          -e NN       : STEPS: drive rotor NN steps to east (NN = 0...127 steps) (default -e0 = no send steps command)
+          -w NN       : STEPS: drive rotor NN steps to west (NN = 0...127 steps) (default -w0 = no send steps command)
+          -L NN       : STEPS: rotor speed parameter for calculate delay while LNB voltage is up after send STEPS command
+                               - for rotor SG2100 NN=15 - you can set it by '-L 15'
+                               - default for slow rotor -L2
+
+          -R N        : repeat all DISEQC master command N times (default -R1)
+
+          -S NN       : store current rotor position in rotor memory cell NN (default -S0 = no store)
+
+          -?/h        : this help
+
+программа работает в 4-х режимах
+-m0 - расчет параметров установки антенны и угла поворота антенны на заданный
+      спутник (задается -s NN) для определенной географической позиции (долгота задается
+      -X NN.nn, широта -Y NN.nn - где NN = целое число градусов, а nn целое число
+      угловых минут. скажем 10 градусов 3 минуты восточной долготы задается -X -10.03  
+      Знак минус в долготе означает восток. Северная широта с плюсом - южная - с минусом.
+      Но для южной широты угол пока рассчитывается неправильно!!!
+      Например:
+      рассчитать углы установки для 10 град. 3 минуты западной, 20 град 59 минут северной
+      на спутник 19.2 восточной
+
+	# ./rotor-control -m0 -X-10.03 -Y 20.59 -s-19.2
+
+	   Sat:      Longitude =   19.20°E
+	   Location: Longitude =   10.05°E (-10°02')
+	             Latitude  =   20.98°W ( 20°59')
+	   Antenna:  Azimuth   =  155.78°  (CW from North)
+	             Elevation =   63.29°
+	   Rotor:    Angle     =   10.65°  to East from South directions
+
+-m1 - расчет параметров и установка ротора в расчитаную позицию Rotor:    Angle     =
+	Например:
+	рассчитать углы с параметрами как в примере для -m0 и установить ротор на этот 
+        угол
+
+	# ./rotor-control -m1 -X-10.03 -Y 20.59 -s-19.2
+	 Opening frontend /dev/dvb/adapter0/frontend0 OK
+	 Set LNB power supply to 18 Volts
+	 Now delay 1000 msec before sending command to rotor...
+
+	   Sat:      Longitude =   19.20°E
+	   Location: Longitude =   10.05°E (-10°02')
+	             Latitude  =   20.98°W ( 20°59')
+	   Antenna:  Azimuth   =  155.78°  (CW from North)
+	             Elevation =   63.29°
+	   Rotor:    Angle     =   10.65°  to East from South directions
+
+	 Send USALS command to rotor: drive to -10.65°   cmd: [e0 31 6e e0 aa]. Sending try: 1
+	 Timeout 30 seconds: . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+	 Frontend closed! Goodbye :)
+
+-m2 - установка ротора в запомненную позицию. Номер запомненной ячейки задается параметром -n NN
+        Например:
+	установить ротор в запомненную в роторе в 10 ячейке позицию
+
+	# ./rotor-control -m2 -n10
+	 Opening frontend /dev/dvb/adapter0/frontend0 OK
+	 Set LNB power supply to 18 Volts
+	 Now delay 1000 msec before sending command to rotor...
+	 Send GotoNN command to rotor:  rotor cell:10    cmd: [e0 31 6b 0a]. Sending try: 1
+	 Timeout 30 seconds: . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+	 Frontend closed! Goodbye :)
+
+-m3 - установить ротор в определенный угол. Угол задается в параметре -A NN (NN = угол поворота в 
+      градусах. Для поворота "налево" от среднего положения - угол задавать с знаком минус)
+      Например:
+	повернуть угол влево от направления на юг на 45.3 градуса
+	# ./rotor-control -m3 -A-45.3
+	 Opening frontend /dev/dvb/adapter0/frontend0 OK
+	 Set LNB power supply to 18 Volts
+	 Now delay 1000 msec before sending command to rotor...
+	 Send USALS command to rotor: drive to -45.30°   cmd: [e0 31 6e e2 d5]. Sending try: 1
+	 Timeout 30 seconds: . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+	 Frontend closed! Goodbye :)
+
+Опции:
+-a N -f N - установка adapter frontend платы к которому подключен ротор
+-V 0|13|18 -O 0|1 - установка напряжения источника питания
+-d N - установка выхода к которому подключен ротор
+-D NN - установка задержки на инициализацию ротора после подъема напряжения
+-t NN - установка задержки до снятия напряжения после засылки команд на поворот ротора
+-e NN -w NN -L NN - параметры на перемещение ротора на NN количество шагов после отработки
+                    основных (USALS или GotoNN команд)
+-R N - повторить ротор десик команды N раз
+-S NN - сохранить текущее положение ротора в ячейке ротора NN
+
+например:
+установить ротор на спутник -13 (13East) для географической координаты 30 градусов 09 минут 
+восточной и 59 градусов 50 минут северной. при этом 
+ротор подключен к плате с adapter=0 frontend=0, установить напряжение 18 вольт с овервольтажем,
+ротор подключен к входу 3 (B/A) десик свитча, дать задержку на инициализацию ротора 1.5 секунды,
+Выделить 45 секунд на поворот ротора. Довернуть ротор на 3 шага на восток. 
+Сохранить полученное положение ротора в 25 ячейке
+
+# ./rotor-control -m1 -s-13 -X-30.09 -Y59.50 -a0 -f0 -V18 -O1 -d3 -D1500 -t45 -e3 -S25
+ Opening frontend /dev/dvb/adapter0/frontend0 OK
+ Set LNB power supply to 18 Volts  and overvoltage mode (+1 Volt)
+ Send SWITCH command: switch input:3  cmd: [e0 10 38 f8]. Sending try: 1 2
+ Now delay 1500 msec before sending command to rotor...
+
+   Sat:      Longitude =   13.00°E
+   Location: Longitude =   30.15°E (-30°09')
+             Latitude  =   59.83°W ( 59°50')
+   Antenna:  Azimuth   =  199.64°  (CW from North)
+             Elevation =   20.55°
+   Rotor:    Angle     =   18.53°  to West from South directions
+
+ Send USALS command to rotor: drive to 18.53°   cmd: [e0 31 6e d1 28]. Sending try: 1
+ Timeout 45 seconds: . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+ Send STEPS command to rotor: 3 steps to East.  cmd: [e0 31 68 fd]. Sending try: 1
+ Timeout 3 seconds: . . .
+ Send STORE command to rotor:  rotor_store_cell:25      cmd: [e0 31 6a 19]. Sending try: 1
+ Frontend closed! Goodbye :)
+
+Сборка
+# make
+сборка производится с включенным в исходные в директорию linux/dvb файлом frontend.h
+если в системе установлено кернел-дерево - можно папку linux удалить

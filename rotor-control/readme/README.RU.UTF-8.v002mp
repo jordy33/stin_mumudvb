@@ -1,0 +1,49 @@
+rotor-control.0.0.2mp 05.02.2007
+
+утилита для управлением ротора - версия для Мультипрото драйвера
+
+=== HELP ===
+полностью повторять весь хелп не буду - только изменения 
+
+Usage: rotor-control-mp [options] \n"
+         turn USALS sat polar-rotor to calculated position or in stored in it position\n"
+         Multiproto version\n"
+......
+          -T FFFFF,P,SSSSS   : check transponder for LOCK (ONLY DVB-S transponders)
+                               (FFFFF = frequences MHz, P = polarization H|V, SSSSS = Symbol rate kHz)
+                               so for check 11642 H 27500 = -T 11642,H,27500
+.........
+
+=== комментарии ===
+- добавлена возможность проверки LOCK заданного опцией -Т транспондера
+  частота задается в мегагерцах - ТОЛЬКО DVB-S транспондеры, 
+  поляризация может быть только заглавные буквы H или V,
+  символьная скорость - в килогерцах.
+
+ВНИМАНИЕ: данная версия работает ТОЛЬКО с драйвером Мультипрото о чем говорит
+          буковки mp в названии и использование linux/dvb/multiproto_frontend.h
+          Версия утилиты для стандартного драйвера - coming soon ;-)
+          Возможно в дальнейшем версии объединятся
+
+=== примеры ===
+установить ротор в позицию 8, ротор подключен к входу A/A десик свитча
+дать на перемещение 15 секунд и проверить LOCK на транспондер 11823,H,27500
+
+# ./rotor-control-mp -m2 -d1 -n8 -t15 -T 11823,H,27500
+ Opening frontend /dev/dvb/adapter0/frontend0 OK
+ Set LNB power supply to 18 Volts
+ Send SWITCH command: switch input:1  cmd: [e0 10 38 f0]. Sending try: 1 2
+ Now delay 1000 msec before sending command to rotor...
+ Send GotoNN command to rotor:  rotor cell:8    cmd: [e0 31 6b 08]. Sending try: 1
+ Timeout 15 seconds: . . . . . . . . . . . . . . .
+ Check transponder 11823,H,27500 (IF=1223MHz) for LOCK: HAS_LOCK
+ Frontend closed! Goodbye :)
+
+ротор уже установлен - двигать не надо - проверим 11662 V 27500
+# ./rotor-control-mp -d1 -s0 -t0 -T 11662,V,27500
+ Opening frontend /dev/dvb/adapter0/frontend0 OK
+ Set LNB power supply to 18 Volts
+ Send SWITCH command: switch input:1  cmd: [e0 10 38 f0]. Sending try: 1 2
+ Check transponder 11662,V,27500 (IF=1912MHz) for LOCK: HAS_LOCK
+ Frontend closed! Goodbye :)
+

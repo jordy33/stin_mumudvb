@@ -1,0 +1,11 @@
+new_channel
+unicast_port=8090
+pids=49
+lnb_type=standard
+lnb_lof_standard=5150
+lnb_lof_low=0
+freq=3845
+modulation=8PSK
+delivery_system=DVBS2
+pol=h
+srate=8703

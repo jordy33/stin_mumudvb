@@ -1,0 +1,14 @@
+autoconfiguration=full
+autoconf_radios=1
+autoconf_scrambled=0
+autoconf_sid_list=1
+lnb_type=standard
+lnb_lof_standard=5150
+lnb_lof_low=0
+freq=4066
+srate=6051
+coderate=auto
+filename_pid=./mumudvb_adapter%card_tuner%tuner.pid
+modulation=QPSK
+delivery_system=DVBS2
+pol=V

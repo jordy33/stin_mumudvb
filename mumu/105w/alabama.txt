@@ -1,0 +1,27 @@
+autoconfiguration=full
+autoconf_radios=1
+autoconf_scrambled=0
+autoconf_sid_list=24,437
+lnb_type=standard
+lnb_lof_standard=5150
+lnb_lof_low=0
+freq=4110
+srate=7135
+coderate=auto
+filename_pid=./mumudvb_adapter%card_tuner%tuner.pid
+modulation=QPSK
+delivery_system=DVBS
+pol=V
+unicast=1
+ip_http=0.0.0.0
+port_http=3333
+multicast_ipv4=0
+multicast_ipv6=0
+sap=0
+rewrite_pat=1
+rewrite_sdt=1
+
+new_channel
+name=Alabama Net 1/2
+service_id=24
+pids=4148

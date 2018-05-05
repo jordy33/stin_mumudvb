@@ -1,0 +1,31 @@
+rotor-control.0.0.3а
+
+сам сделал тест с платой Скайстар1 и стандартным драйвером 
+
+== изменения == 
+маленькое изменение в коде так как эта плата не понимает команды 
+overvoltage FE_ENABLE_HIGH_LNB_VOLTAGE на увеличение выходного напряжения что
+выливается в ошибку
+DVBFE_SET_PARAMS failed
+
+== пример ==
+с стандартным драйвером и платой скайстар - переместить в позицию 5 и проверять
+транспондер 11785,V,27500
+
+# ./rotor-control -m2 -d1 -n5 -T 11785,V,27500
+ Opening frontend /dev/dvb/adapter0/frontend0 OK
+ Set LNB power supply to 18 Volts
+ Send SWITCH command: switch input:1  cmd: [e0 10 38 f0]. Sending try: 1 2
+ Now delay 1000 msec before sending command to rotor...
+ Send GotoNN command to rotor:  rotor cell:5    cmd: [e0 31 6b 05]. Sending try: 1
+ Timeout 30 seconds and check for LOCK: . . . . . . L L L L
+ Check transponder 11785,V,27500 for LOCK: HAS_LOCK,  SS =   43560, SNR =  48333
+ Frontend closed! Goodbye :)
+
+все отработало нормально - что радует )))
+уровни показываются в попугаях (сырые значения) которые выдает фронтенд скайстара
+
+== BUG ==
+надо сказать что бага с DVBFE_SET_PARAMS failed после включения компа на скайстаре
+и стандартном драйвере НЕ БЫЛО - так что надо мне подлечить именно вариант с 
+драйвером Мультипрото - круг ошибки сузился - что уже хорошо ...

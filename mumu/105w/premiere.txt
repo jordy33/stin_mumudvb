@@ -1,0 +1,42 @@
+autoconfiguration=full
+lnb_type=standard
+lnb_lof_standard=5150
+lnb_lof_low=0
+freq=4110
+srate=7135
+modulation=QPSK
+delivery_system=DVBS
+pol=V
+multicast=0
+unicast=1
+ip_http=0.0.0.0
+port_http=3333
+multicast_ipv4=0
+multicast_ipv6=0
+dvr_thread_buffer_size=10
+
+#new_channel
+#name=MPEG Test
+#service_id=1
+#pids=4096
+
+new_channel
+name=Alabama Net 1/2
+service_id=24
+pids=4148
+
+new_channel
+name=132 kb
+service_id=5
+pids=4106
+
+new_channel
+name=197 kb
+service_id=141
+pids=4226
+
+
+new_channel
+name=269 kb
+service_id=72
+pids=4163
