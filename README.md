@@ -91,7 +91,9 @@ If you want listen with kodi in your raspberry open stingray-multicast.3mu
 Download debian package for raspberry pi [here](http://mumudvb.net/download/)
 Then un pack debian package:
 ```
-dpkg -i mumudvb*.deb
+sudo apt-get install libdvbcsa1
+sudo apt-get install dvb-apps
+sudo dpkg -i mumudvb*.deb
 ```
 Usage
 ```
