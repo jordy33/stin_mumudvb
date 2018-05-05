@@ -1,7 +1,7 @@
-autoconfiguration=full
+autoconfiguration=none
 #autoconf_radios=1
 #autoconf_scrambled=0
-#autoconf_sid_list=1
+autoconf_sid_list=1
 lnb_type=standard
 lnb_lof_standard=5150
 lnb_lof_low=0
@@ -12,4 +12,12 @@ filename_pid=./mumudvb_adapter%card_tuner%tuner.pid
 modulation=8PSK
 delivery_system=DVBS2
 pol=H
-sap=1
+unicast=1
+multicast_ipv4=0
+multicast_ipv6=0
+ip_http=0.0.0.0
+port_http=3333
+new_channel
+name=CBS E
+service_id=1
+pids=112 114 

@@ -1,4 +1,4 @@
-# Stingray & MuMuDVB
+tingray & MuMuDVB
 
 Download Raspbian image and format SD card
 ```
@@ -91,7 +91,9 @@ If you want listen with kodi in your raspberry open stingray-multicast.3mu
 Download debian package for raspberry pi [here](http://mumudvb.net/download/)
 Then un pack debian package:
 ```
-dpkg -i mumudvb*.deb
+sudo apt-get install libdvbcsa1
+sudo apt-get install dvb-apps
+sudo dpkg -i mumudvb*.deb
 ```
 Usage
 ```
@@ -130,6 +132,18 @@ Posible Options are:
 --dumpfile
         Debug option : Dump the stream into the specified file
 ```
+Tune a channel and scan pids
+```
+sudo tune-s2 4100 H 29856 -lnb CBAND -system DVB-S2
+sudo scan -c -o pids
+```
+Output:
+```
+SN1A                     (0x0001) 01: PCR == V   V 0x0070 A 0x0072 (ENG) 0x0073 (ENG) 0x0074 (ENG)
+SN1B                     (0x0002) 01: PCR == V   V 0x007a A 0x007c (ENG) 0x007d (ENG) 0x007e (ENG)
+SN1C                     (0x0003) 01: PCR == V   V 0x0084 A 0x0086 (ENG) 0x0087 (ENG) 0x0088 (ENG)
+SN1D                     (0x0004) 01: PCR == V   V 0x008e A 0x0090 (ENG) 0x0091 (ENG) 0x0092 (ENG)
+```
 ### Example:  
 Go to satellite 91w   
 ```
@@ -149,11 +163,17 @@ srate=6051
 ```
 In terminal put the following:
 ```
-umudvb -d --config arts.txt
+mumudvb -d --config arts.txt
 ```
 Open vlc and open network:
 ```
 udp://239.100.0.0:1234
+```
+sudo cp SoftCam.Key /var/keys/.
+```
+sudo apt-get install  libdvbcsa
+cd oscam
+sudo ./oscam
 ```
 
 ### Radio Example
@@ -296,3 +316,4 @@ PANAM-SOCCER;DESPN:1442:HM2:S0.0W:3333:0:4136:0:0:202:9:3:0
 ```
 
 ([link](https://sourceforge.net/projects/channeleditor/))
+
