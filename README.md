@@ -171,9 +171,13 @@ udp://239.100.0.0:1234
 ```
 sudo cp SoftCam.Key /var/keys/.
 ```
-sudo apt-get install  libdvbcsa
+sudo mkdir /var/keys
+
 cd oscam
+cp SoftCam.key /var/keys/SoftCam.Key 
+sudo cp oscam.conf /usr/local/etc
 sudo ./oscam
+
 ```
 
 ### Radio Example
