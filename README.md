@@ -25,7 +25,7 @@ lsb_release
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get -y install git
-sudo git clone https://github.com/jordy33/stin_mumudvb.git
+git clone https://github.com/jordy33/stin_mumudvb.git
 sudo apt-get -y install build-essential
 sudo apt-get -y install dvb-apps
 ```
