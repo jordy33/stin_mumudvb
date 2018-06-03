@@ -7,22 +7,17 @@ ls -lha | grep jessie
 unzip 2017-01-11-raspbian-jessie-lite.zip
 sudo dd bs=1m if=2017-01-11-raspbian-jessie-lite.img of=/dev/rdisk2
 ```
-Boot raspberry pi, connect hdmi monitor and keyboard, once boot log with:  
-user: pi  
-password: raspberry  
-Introduce the following commands:
+Enable ssh
 ```
-raspi-config --expand-rootfs
-sudo reboot
-
+cd /Volumes/boot
+touch ssh
+```
+Insert sd card in raspberry and boot
 
 ```
-Enter sudo raspi-config in a terminal window.  
-Select Interfacing Options.  
-Navigate to and select SSH.  
-Choose Yes.  
-Select Ok.  
-Choose Finish.  
+ssh pi@<ip>
+password <raspberry>
+```
 
 Install Requirements
 ```
