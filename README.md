@@ -3,9 +3,9 @@ tingray & MuMuDVB
 Download Raspbian image and format SD card
 ```
 cd ~/Downloads
-ls -lha | grep jessie
-unzip 2017-01-11-raspbian-jessie-lite.zip
-sudo dd bs=1m if=2017-01-11-raspbian-jessie-lite.img of=/dev/rdisk2
+curl https://downloads.raspberrypi.org/raspbian_lite_latest --output raspbian.zip
+unzip raspbian.zip
+sudo dd bs=1m if=*.img of=/dev/rdisk2
 ```
 Enable ssh
 ```
@@ -13,7 +13,6 @@ cd /Volumes/boot
 touch ssh
 ```
 Insert sd card in raspberry and boot
-
 ```
 ssh pi@<ip>
 password <raspberry>
@@ -21,13 +20,18 @@ password <raspberry>
 
 Install Requirements
 ```
-lsb_release
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get -y install git
 git clone https://github.com/jordy33/stin_mumudvb.git
 sudo apt-get -y install build-essential
 sudo apt-get -y install dvb-apps
+```
+Install Firmware:
+```
+cd ~/prof7500
+sudo cp dvb-usb-p7500.fw /lib/firmware/.
+sudo reboot
 ```
 Compile tune-s2
 ```
@@ -41,16 +45,11 @@ cd udpxy
 sudo make
 sudo make install
 ```
-Install Firmware:
-```
-cd ~/prof7500
-sudo cp dvb-usb-p7500.fw /lib/firmware/.
-sudo reboot
-```
-To support 8psk for prof7500:
+
+High Bit rate patch for prof7500:
 Download the folowing file with sftp and then get:
 ```
-/lib/modules/<currentversion>/kernel/drivers/media/dvb-frontends/stv0900.ko
+/lib/modules/<currentversion last directory>/kernel/drivers/media/dvb-frontends/stv0900.ko
 ```
 Modify the file with [Hex Editor](https://mh-nexus.de/en/hxd/) and then Upload the file to the same location
 
