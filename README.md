@@ -3,6 +3,8 @@ tingray & MuMuDVB
 Download Raspbian image and format SD card
 ```
 cd ~/Downloads
+https://downloads.raspberrypi.org/raspbian_lite/images/
+https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2017-01-10/2017-01-11-raspbian-jessie-lite.zip
 curl https://downloads.raspberrypi.org/raspbian_lite_latest --output raspbian.zip
 unzip raspbian.zip
 sudo dd bs=1m if=*.img of=/dev/rdisk2
